@@ -11,7 +11,7 @@
   <h2>User info</h2>
 
 
-   <%= attachment_image_tag user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg", format: 'jpeg' %>
+   <%= attachment_image_tag user, :profile_image, fallback: "no_image.jpg", format: 'jpeg', size: "100x100"  %>
 <table class="table table-striped">
   <tbody>
     <tr>
@@ -45,7 +45,7 @@
 
 
      <div class="index-form">
-       <%= form_with model:book, url: books_path, method: :post, local: true do |f| %>
+       <%= form_with model:book, url: books_path(:user_id), method: :post, local: true do |f| %>
 
        <h2>New book</h2>
 

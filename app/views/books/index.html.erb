@@ -17,12 +17,36 @@
         <tr>
           <td>
             <%= link_to user_path(book.user.id) do %>
-            <%= attachment_image_tag book.user, :profile_image, :fill, 30, 30, fallback: "no_image.jpg" %> <% end %></td>
-          <td><%= link_to book.title, book_path(book.id) %></td>
+            <%= attachment_image_tag book.user, :profile_image, fallback: "no_image.jpg", size: "30x30" %> <% end %></td>
+          <td><%= link_to book.title, book_path(book) %></td>
           <td><%= book.body %></td>
+                
+                <td>
+               <!-- ここから -->
+<% if book.favorited_by?(current_user) %>
+<li>
+  <%= link_to book_favorites_path(book.id), method: :delete do %>
+    <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+    <%= book.favorites.count %> いいね
+  <% end %>
+</li>
+<% else %>
+<li>
+  <%= link_to book_favorites_path(book.id), method: :post do %>
+    <i class="fa fa-heart-o" aria-hidden="true"></i>
+    <%= book.favorites.count %> いいね
+  <% end %>
+</li>
+<% end %>
+<!-- ここまで -->
+      </td>
+      
         </tr>
         <% end %>
       </tbody>
+      
+
+      
   　</table>
   </div>
 </div>
